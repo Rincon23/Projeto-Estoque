@@ -1,48 +1,40 @@
 from flask import Flask, render_template
 from Senha import Confirmacao
-from BancoMaterial import CriarTabelaMaterial, AddMaterial, SelecionarTodosOsMateriais
+from BancoProduto import CriarTabelaProduto, AddProduto, SelecionarTodosOsProdutos
 import webview
 
 app = Flask(__name__)
 
 #Criar tabela se ela não existir
-CriarTabelaMaterial()
+CriarTabelaProduto()
 
 #Configurar janela do pyview
 windows = webview.create_window('Projeto Banco', app, width = 1900, height=900, resizable=True, confirm_close=False)
 
 #Acessando templates
 @app.route("/")
-def homepage():
+def OOhomepage():
     return render_template("homepage.html")
 
-@app.route("/Pessoas")
-def pessoas():
-    return render_template("Pessoas.html")
-
-@app.route("/Usuarios/<nome_usuario>")
-def usuarios(nome_usuario):
-    return render_template("Usuarios.html", nome_usuario=nome_usuario)
-
 @app.route("/VisualizacaoBanco")
-def VisualizacaoBanco():
-    Materiais = SelecionarTodosOsMateriais()
-    return render_template("VisualizacaoBanco.html", Materiais=Materiais)
+def OOVisualizacaoBanco():
+    Produto = SelecionarTodosOsProdutos()
+    return render_template("VisualizacaoBanco.html", Produto=Produto)
 
-@app.route("/AddMateriais")
+@app.route("/AddProduto")
 def OOAddMateriais():
-    Materiais = SelecionarTodosOsMateriais()
-    return render_template("AddMateriais.html", Materiais=Materiais)
+    Produto = SelecionarTodosOsProdutos()
+    return render_template("AddProduto.html", Produto=Produto)
 
 #Acessando funções
 
 @app.route("/Confirmacao", methods=["POST"])
-def confirmar_usuario():
+def OOconfirmar_usuario():
     return Confirmacao()
 
-@app.route("/AddMaterial", methods=["POST"])
+@app.route("/AddProduto", methods=["POST"])
 def OOAddMaterial():
-    return AddMaterial()
+    return AddProduto()
 
 # colocar o site no ar
 

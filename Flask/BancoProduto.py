@@ -4,40 +4,38 @@ import sqlite3
 app = Flask(__name__)
 
 #Criar tabela se ela não existir
-def CriarTabelaMaterial():
+def CriarTabelaProduto():
     banco = sqlite3.connect('Dados.db')
     cursor = banco.cursor()
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS Material (
-        IdMaterial INTEGER PRIMARY KEY AUTOINCREMENT,
-        Data TEXT,
+    CREATE TABLE IF NOT EXISTS Produto (
+        IdProduto INTEGER PRIMARY KEY AUTOINCREMENT,
         Descricao TEXT,
-        VlMaterial REAL
+        Valor REAL
     )
     """)
 
     banco.commit()
     banco.close()
 
-@app.route("/AddMaterial", methods=["POST"])
-def AddMaterial():
-    Data = request.form["Data"]
+@app.route("/AddProduto", methods=["POST"])
+def AddProduto():
     Descricao = request.form["Descricao"]
-    VlMaterial = request.form["VlMaterial"]
+    Valor = request.form["Valor"]
 
     conn = sqlite3.connect("Dados.db")
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO Material (Data, Descricao, VlMaterial) VALUES (?, ?, ?)", (Data, Descricao, VlMaterial))
+    cursor.execute("INSERT INTO Produto (Descricao, Valor) VALUES (?, ?)", (Descricao, Valor))
     conn.commit()
     conn.close()
 
     return redirect("/VisualizacaoBanco")
 
-#Selecionando todas as pessoas
-def SelecionarTodosOsMateriais():
+#Selecionando todas os produtos
+def SelecionarTodosOsProdutos():
     conn = sqlite3.connect("Dados.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM Material")
+    cursor.execute("SELECT * FROM Produto")
     data = cursor.fetchall()
     conn.close()
     return data

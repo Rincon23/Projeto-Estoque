@@ -11,23 +11,20 @@
     <table border="3">
         <tr>
             <th>Id</th>
-            <th>Data</th>
-            <th>Descrição</th>
-            <th>Valor do material</th>
+            <th>Descricao</th>
+            <th>Valor</th>
         </tr>
-        {% for item in Materiais %}
+        {% for item in Produto %}
         <tr>
             <td>{{ item[0] }}</td>
             <td>{{ item[1] }}</td>
             <td>{{ item[2] }}</td>
-            <td>{{ item[3] }}</td>
         {% endfor %}
     </table>
 
-    <form action="/AddMaterial" method="POST">
-        <input type="date" name="Data" placeholder = "AAAA-MM-DD" required>
-        <input type="text" name="Descricao" placeholder="Descrição" required>
-        <input type="text" name="VlMaterial" placeholder="Valor do Material" required>
+    <form action="/AddProduto" method="POST">
+        <input type="text" name="Descricao" placeholder = "Descrição" required>
+        <input type="number" name="Valor" placeholder="Valor do produto" required>
         <button type="submit">Adicionar</button>
     </form>
 
