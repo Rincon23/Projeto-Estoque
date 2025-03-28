@@ -9,9 +9,9 @@ def CriarTabelaProduto():
     cursor = banco.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS Produto (
-        IdProduto INTEGER PRIMARY KEY AUTOINCREMENT,
-        Descricao TEXT,
-        Valor REAL
+        Descricao TEXT NOT NULL UNIQUE,
+        Valor REAL NOT NULL,
+        Quantidade REAL NOT NULL
     )
     """)
 
@@ -22,14 +22,15 @@ def CriarTabelaProduto():
 def AddProduto():
     Descricao = request.form["Descricao"]
     Valor = request.form["Valor"]
+    Quantidade = request.form["Quantidade"]
 
     conn = sqlite3.connect("Dados.db")
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO Produto (Descricao, Valor) VALUES (?, ?)", (Descricao, Valor))
+    cursor.execute("INSERT INTO Produto (Descricao, Valor, Quantidade) VALUES (?, ?, ?)", (Descricao, Valor, Quantidade))
     conn.commit()
     conn.close()
 
-    return redirect("/VisualizacaoBanco")
+    return redirect("/Cadastrar-Produto")
 
 #Selecionando todas os produtos
 def SelecionarTodosOsProdutos():

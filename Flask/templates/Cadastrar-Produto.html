@@ -10,9 +10,9 @@
     <h2>Banco de Dados</h2>
     <table border="3">
         <tr>
-            <th>Id</th>
             <th>Descricao</th>
             <th>Valor</th>
+            <th>Quantidade</th>
         </tr>
         {% for item in Produto %}
         <tr>
@@ -24,7 +24,8 @@
 
     <form action="/AddProduto" method="POST">
         <input type="text" name="Descricao" placeholder = "Descrição" required>
-        <input type="number" name="Valor" placeholder="Valor do produto" required>
+        <input step="any" type="number" name="Valor" placeholder="Valor do produto" required>
+        <input step="any" type="number" name="Quantidade" placeholder="Quantidade" required>
         <button type="submit">Adicionar</button>
     </form>
 

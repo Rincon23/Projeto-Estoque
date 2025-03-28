@@ -16,19 +16,14 @@ windows = webview.create_window('Projeto Banco', app, width = 1900, height=900, 
 def OOhomepage():
     return render_template("homepage.html")
 
-@app.route("/VisualizacaoBanco")
-def OOVisualizacaoBanco():
-    Produto = SelecionarTodosOsProdutos()
-    return render_template("VisualizacaoBanco.html", Produto=Produto)
-
-@app.route("/Adicionar-Produtos")
-def OOSelecionarTodosOsProdutos():
-    Produto = SelecionarTodosOsProdutos()
-    return render_template("Adicionar-Produtos.html", Produto=Produto)
-
 @app.route("/Menu")
 def OOPaginaMenu():
     return render_template("Menu.html")
+
+@app.route("/Cadastrar-Produto")
+def OOSelecionarTodosOsProdutos():
+    Produto = SelecionarTodosOsProdutos()
+    return render_template("Cadastrar-Produto.html", Produto=Produto)
 
 
 #Acessando funções
