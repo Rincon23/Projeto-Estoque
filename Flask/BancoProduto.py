@@ -40,3 +40,19 @@ def SelecionarTodosOsProdutos():
     Produto = cursor.fetchall()
     conn.close()
     return Produto
+
+@app.route("/DeletarProduto", methods=["POST"])
+def DeleteProduto():
+    try:
+        Descricao = request.form["Descricao"]
+
+        banco = sqlite3.connect('Dados.db')
+        cursor = banco.cursor()
+        cursor.execute("DELETE from Produto WHERE Descricao = ?", (Descricao,))
+
+        banco.commit() 
+        banco.close()
+        print("Os dados foram removidos")
+    except sqlite3.Error as erro:
+        print("Erro ao excluir: ", erro)
+    return redirect("/Cadastrar-Produto") 

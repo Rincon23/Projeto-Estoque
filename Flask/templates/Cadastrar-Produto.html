@@ -29,6 +29,17 @@
         <button type="submit">Adicionar</button>
     </form>
 
+    <form action="/DeletarProduto" method="POST">
+        <input type="text" name="Descricao" placeholder="Nome do Produto" list="lista_Produto" required>
+        <datalist id="lista_Produto">
+            {% for item in Produto %}
+            <option value="{{ item[0] }}">
+            {% endfor %}
+        </datalist>
+        <button type="submit">Remover</button>
+    </form>
+
+
 
 </body>
 </html>
