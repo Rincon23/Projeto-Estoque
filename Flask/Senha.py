@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, render_template
 
 
 app = Flask(__name__)
@@ -19,8 +19,8 @@ def Confirmacao():
 
     if verificarlogin == True:
         print ("Login bem sucedido")
-        return redirect(url_for("VisualizacaoBanco"))  # Redireciona para a página inicial
+        return render_template("Menu.html")
            
     else:
         print ("Login mal sucedido")
-        return redirect(url_for("homepage"))   
+        return render_template("homepage.html")

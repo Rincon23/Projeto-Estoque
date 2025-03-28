@@ -36,6 +36,6 @@ def SelecionarTodosOsProdutos():
     conn = sqlite3.connect("Dados.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM Produto")
-    data = cursor.fetchall()
+    Produto = cursor.fetchall()
     conn.close()
-    return data
+    return Produto

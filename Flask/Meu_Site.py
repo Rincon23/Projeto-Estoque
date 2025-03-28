@@ -21,10 +21,15 @@ def OOVisualizacaoBanco():
     Produto = SelecionarTodosOsProdutos()
     return render_template("VisualizacaoBanco.html", Produto=Produto)
 
-@app.route("/AddProduto")
-def OOAddMateriais():
+@app.route("/Adicionar-Produtos")
+def OOSelecionarTodosOsProdutos():
     Produto = SelecionarTodosOsProdutos()
-    return render_template("AddProduto.html", Produto=Produto)
+    return render_template("Adicionar-Produtos.html", Produto=Produto)
+
+@app.route("/Menu")
+def OOPaginaMenu():
+    return render_template("Menu.html")
+
 
 #Acessando funções
 
@@ -33,7 +38,7 @@ def OOconfirmar_usuario():
     return Confirmacao()
 
 @app.route("/AddProduto", methods=["POST"])
-def OOAddMaterial():
+def OOAddProduto():
     return AddProduto()
 
 # colocar o site no ar
