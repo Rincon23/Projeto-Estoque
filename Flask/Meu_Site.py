@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from Senha import Confirmacao
-from BancoProduto import CriarTabelaProduto, AddProduto, SelecionarTodosOsProdutos, EditarProduto
+from BancoProduto import CriarTabelaProduto, AddProduto, SelecionarTodosOsProdutos, DeleteProduto, EditarProduto
 import webview
 
 app = Flask(__name__)
@@ -40,6 +40,10 @@ def OOconfirmar_usuario():
 @app.route("/AddProduto", methods=["POST"])
 def OOAddProduto():
     return AddProduto()
+
+@app.route("/DeletarProduto", methods=["POST"])
+def OODeletarProduto():
+    return DeleteProduto()
 
 # colocar o site no ar
 
