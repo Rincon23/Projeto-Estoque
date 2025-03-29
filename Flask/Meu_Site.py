@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from Senha import Confirmacao
-from BancoProduto import CriarTabelaProduto, AddProduto, SelecionarTodosOsProdutos
+from BancoProduto import CriarTabelaProduto, AddProduto, SelecionarTodosOsProdutos, EditarProduto
 import webview
 
 app = Flask(__name__)
@@ -24,6 +24,11 @@ def OOPaginaMenu():
 def OOSelecionarTodosOsProdutos():
     Produto = SelecionarTodosOsProdutos()
     return render_template("Cadastrar-Produto.html", Produto=Produto)
+
+@app.route("/PagEditarProduto/<descricao>")
+def OOEditarProduto(descricao):
+    EditorProduto = EditarProduto(descricao)
+    return render_template("PagEditarProduto.html", EditorProduto=EditorProduto)
 
 
 #Acessando funções

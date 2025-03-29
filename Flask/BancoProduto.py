@@ -40,3 +40,13 @@ def SelecionarTodosOsProdutos():
     Produto = cursor.fetchall()
     conn.close()
     return Produto
+
+#Editar produto
+def EditarProduto(descricao):
+    conn = sqlite3.connect("Dados.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Produto WHERE Descricao = ?", (descricao,))
+    EditorProduto = cursor.fetchone()
+    conn.close()
+
+    return EditorProduto
