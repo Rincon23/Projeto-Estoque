@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Login - Sistema de Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylehomepage.css') }}">
 </head>
 <body>
-    <p>Acesso ao Banco de Dados</p>
-
-    <p></p>
-    <form action="/Confirmacao" method="POST">
-        <input type="text" name="nomedeusuario" placeholder = "Nome" required>
-        <input type="password" name="senhadeusuario" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-    </form>
-    <p></p>
-
-    <!--Botão de acesso ao Banco de dados-->
-    <a href="/Cadastrar-Produto"><button type="button">Cadastrar-Produto</button></a>
-
-
+    <img src="logo.png" alt="Logo da Empresa" class="logo">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/Confirmacao" method="POST">
+            <div class="input-group">
+                <label for="nomedeusuario">Usuário</label>
+                <input type="text" id="nomedeusuario" name="nomedeusuario" required>
+            </div>
+            <div class="input-group">
+                <label for="senhadeusuario">Senha</label>
+                <input type="password" id="senhadeusuario" name="senhadeusuario" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="/Cadastrar-Produto"><button type="button">Cadastrar Produto</button></a>
+    </div>
 </body>
 </html>

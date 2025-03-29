@@ -1,48 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisualizacaoBanco</title>
+    <title>Estoque</title>
+    <link rel="stylesheet" href="../static/css/styleCadastrar-Produto.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Estoque</h1>
+        
+        <div class="menu">
+            <button id="cadastrarBtn" class="active">Cadastrar</button>
+            <button id="removerBtn">Remover</button>
+        </div>
 
-    <h2>Banco de Dados</h2>
-    <table border="3">
-        <tr>
-            <th>Descricao</th>
-            <th>Valor</th>
-            <th>Quantidade</th>
-        </tr>
-        {% for item in Produto %}
-        <tr>
-            <td>{{ item[0] }}</td>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>
-                <a href="/PagEditarProduto/{{ item[0] }}">✏️</a> 
-            </td>
-        {% endfor %}
-    </table>
+        <!-- Adicionar/Remover -->
+        <div id="cadastroForm" class="form-container">
+            <form action="/AddProduto" method="POST">
+                <table>
+                    <tr>
+                        <td><input type="text" name="Descricao" placeholder="Descrição" required></td>
+                        <td><input step="any" type="number" name="Valor" placeholder="Valor" required></td>
+                        <td><input step="any" type="number" name="Quantidade" placeholder="Quantidade" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><button type="submit">Adicionar</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        <div id="remocaoForm" class="form-container" style="display: none;">
+            <form action="/DeletarProduto" method="POST">
+                <table>
+                    <tr>
+                        <td><input type="text" name="Descricao" placeholder="Descrição" list="lista_Produto" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><button type="submit">Remover</button></td>
+                    </tr>
+                </table>
+                <datalist id="lista_Produto">
+                    {% for item in Produto %}
+                    <option value="{{ item[0] }}">
+                    {% endfor %}
+                </datalist>
+            </form>
+        </div>
 
-    <form action="/AddProduto" method="POST">
-        <input type="text" name="Descricao" placeholder = "Descrição" required>
-        <input step="any" type="number" name="Valor" placeholder="Valor do produto" required>
-        <input step="any" type="number" name="Quantidade" placeholder="Quantidade" required>
-        <button type="submit">Adicionar</button>
-    </form>
+        <!-- Tabela -->
+        <div class="tabela-container">
+            <table border="2">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Quantidade</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in Produto %}
+                    <tr>
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] }}</td>
+                        <td>{{ item[2] }}</td>
+                        <td>
+                            <a href="/PagEditarProduto/{{ item[0] }}">✏️</a> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <!-- Isso é JavaScript, fiz no chat pq queria fazer essa parada e n sabia kakakaka (n criei um arquivo só pra ele pq é pouca coisa) -->
+    <script>
+        document.getElementById('cadastrarBtn').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('removerBtn').classList.remove('active');
+            document.getElementById('cadastroForm').style.display = 'block';
+            document.getElementById('remocaoForm').style.display = 'none';
+        });
 
-    <form action="/DeletarProduto" method="POST">
-        <input type="text" name="Descricao" placeholder="Nome do Produto" list="lista_Produto" required>
-        <datalist id="lista_Produto">
-            {% for item in Produto %}
-            <option value="{{ item[0] }}">
-            {% endfor %}
-        </datalist>
-        <button type="submit">Remover</button>
-    </form>
-
-
-
+        document.getElementById('removerBtn').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('cadastrarBtn').classList.remove('active');
+            document.getElementById('remocaoForm').style.display = 'block';
+            document.getElementById('cadastroForm').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
