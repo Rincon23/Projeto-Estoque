@@ -1,35 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar</title>
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="../static/css/stylePagEditarProduto.css">
 </head>
 <body>
 
-    <h2>Você está editando o produto: {{ EditorProduto[0] }}</h2>
-    <table border="3">
-      <tr>
-        <th>Descrição</th>
-        <th>Valor</th>
-        <th>Quantidade</th>
-      </tr>
-      <tr>
-        <td>{{ EditorProduto[0] }}</td>
-        <td>{{ EditorProduto[1] }}</td>
-        <td>{{ EditorProduto[2] }}</td>
-      </tr>
-    </table>
-    
+    <div class="container">
+        <h2>Você está editando o produto: <span>{{ EditorProduto[0] }}</span></h2>
+        
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Quantidade</th>
+                </tr>
+                <tr>
+                    <td>{{ EditorProduto[0] }}</td>
+                    <td>{{ EditorProduto[1] }}</td>
+                    <td>{{ EditorProduto[2] }}</td>
+                </tr>
+            </table>
+        </div>
 
-    <form action="/EditarProduto" method="POST">
-        <input type="text" name="NovaDescricao" placeholder = "Nova Descrição" required>
-        <input step="any" type="number" name="NovoValor" placeholder="Novo Valor do produto" required>
-        <input step="any" type="number" name="NovaQuantidade" placeholder="Nova Quantidade" required>
-        <button type="submit">Confirmar Edição</button>
-    </form>
-
+        <form action="/EditarProduto" method="POST" class="edit-form">
+            <input type="text" name="NovaDescricao" placeholder="Nova Descrição" required>
+            <input step="any" type="number" name="NovoValor" placeholder="Novo Valor do produto" required>
+            <input step="any" type="number" name="NovaQuantidade" placeholder="Nova Quantidade" required>
+            <button type="submit">Confirmar Edição</button>
+        </form>
+    </div>
 
 </body>
 </html>
+
 
