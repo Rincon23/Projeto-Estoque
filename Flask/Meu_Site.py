@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from Senha import Confirmacao
-from BancoProduto import CriarTabelaProduto, AddProduto, SelecionarTodosOsProdutos, DeleteProduto, EditarProduto
+from BancoProduto import CriarTabelaProduto, AddProduto, SelecionarTodosOsProdutos, DeleteProduto, EditarProduto, BuscarProduto
 import webview
 
 app = Flask(__name__)
@@ -27,7 +27,7 @@ def OOSelecionarTodosOsProdutos():
 
 @app.route("/PagEditarProduto/<descricao>")
 def OOEditarProduto(descricao):
-    EditorProduto = EditarProduto(descricao)
+    EditorProduto = BuscarProduto(descricao)  # Corrigir para usar BuscarProduto
     return render_template("PagEditarProduto.html", EditorProduto=EditorProduto)
 
 
@@ -45,9 +45,17 @@ def OOAddProduto():
 def OODeletarProduto():
     return DeleteProduto()
 
+@app.route("/EditarProduto", methods=["POST"])
+def OOEditarProduto2():
+    DescricaoAntiga = request.form["DescricaoAntiga"]
+    NovaDescricao = request.form["NovaDescricao"]
+    NovoValor = request.form["NovoValor"]
+    NovaQuantidade = request.form["NovaQuantidade"]
+    return EditarProduto(DescricaoAntiga, NovaDescricao, NovoValor, NovaQuantidade)
+
 # colocar o site no ar
 
 if __name__ == "__main__":
     #webview.start()
     app.run(debug=True)
-    
+

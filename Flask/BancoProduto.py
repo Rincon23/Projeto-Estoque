@@ -40,6 +40,7 @@ def SelecionarTodosOsProdutos():
     Produto = cursor.fetchall()
     conn.close()
     return Produto
+
 @app.route("/DeletarProduto", methods=["POST"])
 def DeleteProduto():
     try:
@@ -56,8 +57,8 @@ def DeleteProduto():
         print("Erro ao excluir: ", erro)
     return redirect("/Cadastrar-Produto") 
 
-#Editar produto
-def EditarProduto(descricao):
+#Buscar produto
+def BuscarProduto(descricao):
     conn = sqlite3.connect("Dados.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM Produto WHERE Descricao = ?", (descricao,))
@@ -65,3 +66,35 @@ def EditarProduto(descricao):
     conn.close()
 
     return EditorProduto
+
+def EditarProduto(DescricaoAntiga, NovaDescricao, NovoValor, NovaQuantidade):
+    try:
+        banco = sqlite3.connect('Dados.db')
+        cursor = banco.cursor()
+
+        cursor.execute("UPDATE Produto SET Descricao = ?, Valor = ?, Quantidade = ? WHERE Descricao = ?", 
+                       (NovaDescricao, NovoValor, NovaQuantidade, DescricaoAntiga))
+
+        banco.commit() 
+        banco.close()
+        print("Produto atualizado com sucesso!")
+
+    except sqlite3.Error as erro:
+        print("Erro ao atualizar o produto: ", erro)
+
+    return redirect("/Cadastrar-Produto")
+
+@app.route("/EditarProduto", methods=["POST"])
+def EditarProdutoRoute():
+    try:
+        DescricaoAntiga = request.form["DescricaoAntiga"]
+        NovaDescricao = request.form["NovaDescricao"]
+        NovoValor = request.form["NovoValor"]
+        NovaQuantidade = request.form["NovaQuantidade"]
+
+        EditarProduto(DescricaoAntiga, NovaDescricao, NovoValor, NovaQuantidade)
+
+    except sqlite3.Error as erro:
+        print("Erro ao atualizar o produto: ", erro)
+
+    return redirect("/Cadastrar-Produto")

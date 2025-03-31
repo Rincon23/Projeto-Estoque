@@ -27,6 +27,7 @@
         </div>
 
         <form action="/EditarProduto" method="POST" class="edit-form">
+            <input type="hidden" name="DescricaoAntiga" value="{{ EditorProduto[0] }}">
             <input type="text" name="NovaDescricao" placeholder="Nova Descrição" required>
             <input step="any" type="number" name="NovoValor" placeholder="Novo Valor do produto" required>
             <input step="any" type="number" name="NovaQuantidade" placeholder="Nova Quantidade" required>
